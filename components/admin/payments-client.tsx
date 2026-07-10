@@ -259,7 +259,7 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
                           </td>
                           <td className="px-6 py-4 text-right">
                             <div className="flex items-center justify-end gap-2">
-                              {bill.status !== 'paid' && (
+                              {pendingAmount > 0.01 && (
                                 <div className="flex items-center gap-1">
                                   <Button
                                     size="sm"
