@@ -37,9 +37,11 @@ export function getReceiptNumber(transaction: any) {
   return `GL-${year}-${receiptNum}`
 }
 
-export function getInitials(name: string): string {
+export function getInitials(name: string | null | undefined): string {
+  if (!name || typeof name !== 'string') return '?'
   return name
     .split(' ')
+    .filter(Boolean)
     .map((n) => n[0])
     .join('')
     .toUpperCase()
