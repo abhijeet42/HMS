@@ -334,6 +334,11 @@ export default function StudentProfileView({
                                     <span>Total Calculated</span>
                                     <span>{formatCurrency(bill.total_amount || 0)}</span>
                                   </div>
+                                  {bill.notes && (
+                                    <div className="mt-2 p-2 bg-yellow-50 border border-yellow-100 rounded text-[11px] text-yellow-800">
+                                      <span className="font-bold">Hostel Note:</span> {bill.notes}
+                                    </div>
+                                  )}
                                 </div>
                               </td>
                             </tr>

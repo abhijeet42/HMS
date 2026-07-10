@@ -190,6 +190,11 @@ export default function StudentRentClient({
                             <span>Total</span>
                             <span>{formatCurrency(bill.total_amount || 0)}</span>
                           </div>
+                          {bill.notes && (
+                            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-100 rounded-lg text-xs text-yellow-800">
+                              <span className="font-bold">Hostel Note:</span> {bill.notes}
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -206,6 +211,11 @@ export default function StudentRentClient({
                                   <div>
                                     <p className="font-semibold text-green-700">{formatCurrency(p.amount)}</p>
                                     <p className="text-xs text-gray-500">via {p.payment_mode.toUpperCase()}</p>
+                                    {p.notes && (
+                                      <p className="text-[11px] text-gray-600 bg-white p-1 rounded border border-dashed mt-1 max-w-xs">
+                                        <span className="font-semibold">Note:</span> {p.notes}
+                                      </p>
+                                    )}
                                   </div>
                                   <p className="text-xs text-gray-500">{new Date(p.paid_at).toLocaleDateString()}</p>
                                 </div>

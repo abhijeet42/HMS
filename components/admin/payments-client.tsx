@@ -11,7 +11,7 @@ import { createClient } from '@/lib/supabase/client'
 import { formatCurrency, getInitials, getBillStatus, getReceiptNumber } from '@/lib/utils'
 import { MONTHS, CURRENT_YEAR, CURRENT_MONTH } from '@/lib/constants'
 import type { BillWithStudent, StudentWithRoom, PaymentTransaction } from '@/types/database'
-import { Plus, Search, Receipt, CreditCard, Pencil, FileText, Filter, ChevronDown, ChevronUp } from 'lucide-react'
+import { Plus, Search, Receipt, CreditCard, Pencil, FileText, Filter, ChevronDown, ChevronUp, Banknote, Smartphone, SlidersHorizontal } from 'lucide-react'
 
 interface PaymentsClientProps {
   bills: BillWithStudent[]
@@ -119,12 +119,12 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
       {showBillForm && <BillForm editBill={editBill} students={students} onClose={closeForms} />}
       {showPaymentForm && payBill && <PaymentForm bill={payBill} onClose={closeForms} />}
 
-      <div className="p-6 space-y-6">
+      <div className="p-4 sm:p-6 space-y-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Rent & Payments</h1>
-            <p className="text-sm text-gray-500">Manage monthly bills and record payments</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Rent & Payments</h1>
+            <p className="text-sm text-gray-500 mt-0.5">Manage monthly bills and record payments</p>
           </div>
           <div className="flex gap-2">
             <Button onClick={() => { setEditBill(null); setShowBillForm(true) }}>
@@ -136,40 +136,40 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-            <p className="text-sm font-medium text-gray-500">Total Expected</p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">{formatCurrency(totalExpected)}</p>
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Expected</p>
+            <p className="text-2xl font-bold text-gray-900 mt-1.5">{formatCurrency(totalExpected)}</p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-            <p className="text-sm font-medium text-gray-500">Total Collected</p>
-            <p className="text-2xl font-bold text-green-600 mt-1">{formatCurrency(totalCollected)}</p>
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Collected</p>
+            <p className="text-2xl font-bold text-green-600 mt-1.5">{formatCurrency(totalCollected)}</p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-            <p className="text-sm font-medium text-gray-500">Total Pending</p>
-            <p className="text-2xl font-bold text-red-600 mt-1">{formatCurrency(totalPending)}</p>
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Pending</p>
+            <p className="text-2xl font-bold text-red-600 mt-1.5">{formatCurrency(totalPending)}</p>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-4">
+        <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-4">
           <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
             <Filter className="h-4 w-4" /> Filters
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search student..."
-                className="w-full pl-9 pr-3 h-9 rounded-md border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-9 pr-3 h-9 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/70 focus:border-blue-400"
               />
             </div>
             
             <select
               value={filterMonth}
               onChange={(e) => setFilterMonth(Number(e.target.value))}
-              className="h-9 w-full rounded-md border border-gray-200 bg-white px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="h-9 w-full rounded-lg border border-gray-200 bg-white px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/70 cursor-pointer"
             >
               {MONTHS.map(m => (
                 <option key={m.value} value={m.value}>{m.label}</option>
@@ -179,7 +179,7 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
             <select
               value={filterYear}
               onChange={(e) => setFilterYear(Number(e.target.value))}
-              className="h-9 w-full rounded-md border border-gray-200 bg-white px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="h-9 w-full rounded-lg border border-gray-200 bg-white px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/70 cursor-pointer"
             >
               {[CURRENT_YEAR - 1, CURRENT_YEAR, CURRENT_YEAR + 1].map(y => (
                 <option key={y} value={y}>{y}</option>
@@ -189,7 +189,7 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="h-9 w-full rounded-md border border-gray-200 bg-white px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="h-9 w-full rounded-lg border border-gray-200 bg-white px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/70 cursor-pointer"
             >
               <option value="all">All Statuses</option>
               <option value="pending">Pending</option>
@@ -201,7 +201,7 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
 
         {/* Bills List */}
         {filteredBills.length === 0 ? (
-          <div className="text-center py-16 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <div className="text-center py-16 bg-white border border-gray-200 rounded-2xl shadow-sm">
             <FileText className="mx-auto h-10 w-10 text-gray-300" />
             <p className="mt-3 text-sm font-medium text-gray-500">No bills found</p>
             <p className="text-xs text-gray-400 mt-1">
@@ -209,19 +209,19 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
             </p>
           </div>
         ) : (
-          <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm whitespace-nowrap">
-                <thead className="bg-gray-50 text-gray-500 uppercase tracking-wider text-xs font-medium border-b border-gray-200">
+                <thead className="bg-gray-50/80 text-gray-500 uppercase tracking-wider text-xs font-semibold border-b border-gray-200 sticky top-0 z-10">
                   <tr>
-                    <th className="px-6 py-4">Student</th>
-                    <th className="px-6 py-4">Amount</th>
-                    <th className="px-6 py-4">Status</th>
-                    <th className="px-6 py-4">Due Date</th>
-                    <th className="px-6 py-4 text-right">Actions</th>
+                    <th className="px-6 py-3.5">Student</th>
+                    <th className="px-6 py-3.5">Amount</th>
+                    <th className="px-6 py-3.5">Status</th>
+                    <th className="px-6 py-3.5">Due Date</th>
+                    <th className="px-6 py-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-100">
                   {filteredBills.map((bill) => {
                     const statusConfig = getBillStatus(bill.status)
                     const isExpanded = expandedBillId === bill.id
@@ -229,7 +229,7 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
                     
                     return (
                       <React.Fragment key={bill.id}>
-                        <tr className={`hover:bg-gray-50/50 ${isExpanded ? 'bg-gray-50/50' : ''}`}>
+                        <tr className={`transition-colors ${isExpanded ? 'bg-blue-50/40' : 'hover:bg-gray-50'}`}>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
                               <div className="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-semibold flex-shrink-0">
@@ -242,56 +242,64 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
                             </div>
                           </td>
                           <td className="px-6 py-4">
-                            <p className="font-medium text-gray-900">{formatCurrency(bill.total_amount || 0)}</p>
+                            <p className="font-semibold text-gray-900">{formatCurrency(bill.total_amount || 0)}</p>
                             {pendingAmount > 0 ? (
-                              <p className="text-xs text-red-500 mt-0.5">{formatCurrency(pendingAmount)} pending</p>
+                              <p className="text-xs text-red-500 mt-0.5 font-medium">{formatCurrency(pendingAmount)} pending</p>
                             ) : (
-                              <p className="text-xs text-green-500 mt-0.5">Fully paid</p>
+                              <p className="text-xs text-green-600 mt-0.5 font-medium">Fully paid</p>
                             )}
                           </td>
                           <td className="px-6 py-4">
-                            <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusConfig.color}`}>
+                            <Badge
+                              variant={bill.status === 'paid' ? 'success' : bill.status === 'partial' ? 'warning' : 'danger'}
+                            >
                               {statusConfig.label}
-                            </span>
+                            </Badge>
                           </td>
                           <td className="px-6 py-4 text-gray-600">
                             {bill.due_date ? new Date(bill.due_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'}
                           </td>
                           <td className="px-6 py-4 text-right">
-                            <div className="flex items-center justify-end gap-2">
+                            <div className="flex items-center justify-end gap-1.5 flex-wrap">
                               {pendingAmount > 0.01 && (
-                                <div className="flex items-center gap-1">
+                                <div className="flex items-center gap-1.5 bg-gray-50 border border-gray-200 rounded-lg p-1">
                                   <Button
                                     size="sm"
                                     onClick={() => handleQuickConfirm(bill, 'cash')}
-                                    className="bg-green-650 hover:bg-green-700 text-white font-medium text-xs px-2.5 h-8 flex items-center gap-1"
+                                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs px-2.5 h-7 flex items-center gap-1 shadow-sm"
                                     disabled={loadingPaymentId === bill.id}
+                                    title="Mark as fully paid via cash"
                                   >
-                                    Confirm Cash
+                                    <Banknote className="h-3.5 w-3.5" />
+                                    Cash
                                   </Button>
                                   <Button
                                     size="sm"
                                     onClick={() => handleQuickConfirm(bill, 'upi')}
-                                    className="bg-purple-650 hover:bg-purple-700 text-white font-medium text-xs px-2.5 h-8 flex items-center gap-1"
+                                    className="bg-violet-600 hover:bg-violet-700 text-white font-medium text-xs px-2.5 h-7 flex items-center gap-1 shadow-sm"
                                     disabled={loadingPaymentId === bill.id}
+                                    title="Mark as fully paid via UPI"
                                   >
-                                    Confirm UPI
+                                    <Smartphone className="h-3.5 w-3.5" />
+                                    UPI
                                   </Button>
                                   <Button
                                     size="sm"
                                     variant="outline"
                                     onClick={() => openPayment(bill)}
-                                    className="h-8 text-xs font-medium border-gray-200 text-gray-700 hover:bg-gray-50"
+                                    className="h-7 text-xs font-medium bg-white border-gray-300 text-gray-700 hover:bg-gray-100 flex items-center gap-1"
                                     disabled={loadingPaymentId === bill.id}
+                                    title="Record a partial or other payment"
                                   >
-                                    Partial/Other
+                                    <SlidersHorizontal className="h-3.5 w-3.5" />
+                                    Partial
                                   </Button>
                                 </div>
                               )}
-                              <Button size="icon" variant="ghost" onClick={() => openEditBill(bill)} title="Edit Bill">
+                              <Button size="icon" variant="ghost" onClick={() => openEditBill(bill)} title="Edit Bill" className="h-8 w-8">
                                 <Pencil className="h-4 w-4 text-gray-500" />
                               </Button>
-                              <Button size="icon" variant="ghost" onClick={() => toggleExpand(bill.id)}>
+                              <Button size="icon" variant="ghost" onClick={() => toggleExpand(bill.id)} className="h-8 w-8" title={isExpanded ? 'Collapse' : 'Expand details'}>
                                 {isExpanded ? <ChevronUp className="h-4 w-4 text-gray-500" /> : <ChevronDown className="h-4 w-4 text-gray-500" />}
                               </Button>
                             </div>
@@ -300,12 +308,12 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
                         {/* Expanded details view */}
                         {isExpanded && (
                           <tr>
-                            <td colSpan={5} className="bg-gray-50 p-6 border-b border-gray-200">
+                            <td colSpan={5} className="bg-blue-50/30 p-6 border-b border-gray-200 animate-fade-in">
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
                                 {/* Bill Breakdown */}
                                 <div>
                                   <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Bill Breakdown</h4>
-                                  <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-2">
+                                  <div className="bg-white rounded-xl border border-gray-200 p-4 space-y-2 shadow-xs">
                                     {bill.base_rent > 0 && <div className="flex justify-between text-sm"><span className="text-gray-600">Base Rent</span><span className="font-medium">{formatCurrency(bill.base_rent)}</span></div>}
                                     {bill.electricity > 0 && <div className="flex justify-between text-sm"><span className="text-gray-600">Electricity</span><span className="font-medium">{formatCurrency(bill.electricity)}</span></div>}
                                     {bill.water > 0 && <div className="flex justify-between text-sm"><span className="text-gray-600">Water</span><span className="font-medium">{formatCurrency(bill.water)}</span></div>}
@@ -331,13 +339,18 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
                                       <span>Total</span>
                                       <span>{formatCurrency(bill.total_amount || 0)}</span>
                                     </div>
+                                    {bill.notes && (
+                                      <div className="mt-3 p-2.5 bg-yellow-50 border border-yellow-100 rounded-xl text-xs text-yellow-800">
+                                        <span className="font-bold">Hostel Note:</span> {bill.notes}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
 
                                 {/* Transaction History */}
                                 <div>
                                   <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Payment History</h4>
-                                  <div className="bg-white rounded-lg border border-gray-200 p-4">
+                                  <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-xs">
                                     {transactions.filter(t => t.bill_id === bill.id).length === 0 ? (
                                       <p className="text-sm text-gray-500 italic">No payments recorded yet.</p>
                                     ) : (
@@ -355,6 +368,11 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
                                                 {new Date(t.paid_at).toLocaleDateString()} • {t.payment_mode.toUpperCase()}
                                                 {t.transaction_ref && ` • Ref: ${t.transaction_ref}`}
                                               </p>
+                                              {t.notes && (
+                                                <p className="text-[11px] text-gray-600 bg-gray-50 p-1.5 rounded border border-dashed mt-1.5 max-w-xs">
+                                                  <span className="font-semibold">Note:</span> {t.notes}
+                                                </p>
+                                              )}
                                             </div>
                                             {t.collected_by && (
                                               <p className="text-xs text-gray-400">By: {t.collected_by}</p>

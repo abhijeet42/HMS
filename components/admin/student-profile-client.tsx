@@ -566,6 +566,11 @@ export default function StudentProfileClient({
                                         <span>Calculated Total</span>
                                         <span>{formatCurrency(bill.total_amount || 0)}</span>
                                       </div>
+                                      {bill.notes && (
+                                        <div className="mt-2.5 p-2 bg-yellow-50 border border-yellow-100 rounded text-[11px] text-yellow-800">
+                                          <span className="font-semibold">Hostel Note:</span> {bill.notes}
+                                        </div>
+                                      )}
                                     </div>
                                   </td>
                                 </tr>

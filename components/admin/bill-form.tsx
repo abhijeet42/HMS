@@ -157,14 +157,22 @@ export default function BillForm({ students, onClose, editBill, defaultStudentId
         notes: form.notes || null,
       }
 
-      if (editBill) {
+       if (editBill) {
         const { error: err } = await supabase.from('monthly_bills').update(payload).eq('id', editBill.id)
         if (err) {
+          if (err.code === '23505' || err.message.includes('duplicate key') || err.message.includes('unique constraint')) {
+            throw new Error('A monthly bill has already been generated for this student in the selected month and year.')
+          }
           // If total_amount is still a generated column, retry without it
           if (err.message.includes('non-DEFAULT value') || err.message.includes('total_amount')) {
             const { total_amount, ...retryPayload } = payload
             const { error: retryErr } = await supabase.from('monthly_bills').update(retryPayload).eq('id', editBill.id)
-            if (retryErr) throw retryErr
+            if (retryErr) {
+              if (retryErr.code === '23505' || retryErr.message.includes('duplicate key') || retryErr.message.includes('unique constraint')) {
+                throw new Error('A monthly bill has already been generated for this student in the selected month and year.')
+              }
+              throw retryErr
+            }
           } else {
             throw err
           }
@@ -172,11 +180,19 @@ export default function BillForm({ students, onClose, editBill, defaultStudentId
       } else {
         const { error: err } = await supabase.from('monthly_bills').insert(payload)
         if (err) {
+          if (err.code === '23505' || err.message.includes('duplicate key') || err.message.includes('unique constraint')) {
+            throw new Error('A monthly bill has already been generated for this student in the selected month and year.')
+          }
           // If total_amount is still a generated column, retry without it
           if (err.message.includes('non-DEFAULT value') || err.message.includes('total_amount')) {
             const { total_amount, ...retryPayload } = payload
             const { error: retryErr } = await supabase.from('monthly_bills').insert(retryPayload)
-            if (retryErr) throw retryErr
+            if (retryErr) {
+              if (retryErr.code === '23505' || retryErr.message.includes('duplicate key') || retryErr.message.includes('unique constraint')) {
+                throw new Error('A monthly bill has already been generated for this student in the selected month and year.')
+              }
+              throw retryErr
+            }
           } else {
             throw err
           }

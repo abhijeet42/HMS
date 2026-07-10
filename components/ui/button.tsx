@@ -9,13 +9,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'default', size = 'default', loading, disabled, children, ...props }, ref) => {
-    const base = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:pointer-events-none disabled:opacity-50'
+    const base = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-150 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50'
 
     const variants = {
-      default: 'bg-blue-600 text-white hover:bg-blue-700',
-      outline: 'border border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
+      default: 'bg-blue-600 text-white shadow-sm hover:bg-blue-700 hover:shadow-md',
+      outline: 'border border-gray-200 bg-white text-gray-900 shadow-xs hover:bg-gray-50 hover:border-gray-300',
       ghost: 'text-gray-700 hover:bg-gray-100',
-      destructive: 'bg-red-600 text-white hover:bg-red-700',
+      destructive: 'bg-red-600 text-white shadow-sm hover:bg-red-700 hover:shadow-md',
       secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200',
       link: 'text-blue-600 underline-offset-4 hover:underline p-0 h-auto',
     }
