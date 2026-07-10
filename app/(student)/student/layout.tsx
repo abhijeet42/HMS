@@ -32,7 +32,9 @@ export default async function StudentLayout({
   return (
     <div className="flex min-h-screen bg-gray-50 flex-col lg:flex-row">
       <StudentSidebar />
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-x-hidden min-w-0">
+        {/* Top padding for mobile sticky header */}
+        <div className="lg:hidden h-14" />
         <div className="mx-auto max-w-7xl">
           {children}
         </div>

@@ -211,7 +211,7 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
         ) : (
           <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm whitespace-nowrap">
+              <table className="w-full text-left text-sm" style={{minWidth: '680px'}}>
                 <thead className="bg-gray-50/80 text-gray-500 uppercase tracking-wider text-xs font-semibold border-b border-gray-200 sticky top-0 z-10">
                   <tr>
                     <th className="px-6 py-3.5">Student</th>
@@ -259,47 +259,46 @@ export default function PaymentsClient({ bills, students, transactions }: Paymen
                           <td className="px-6 py-4 text-gray-600">
                             {bill.due_date ? new Date(bill.due_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'}
                           </td>
-                          <td className="px-6 py-4 text-right">
-                            <div className="flex items-center justify-end gap-1.5 flex-wrap">
+                          <td className="px-4 py-4 text-right">
+                            <div className="flex items-center justify-end gap-1.5 flex-nowrap">
                               {pendingAmount > 0.01 && (
-                                <div className="flex items-center gap-1.5 bg-gray-50 border border-gray-200 rounded-lg p-1">
+                                <div className="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-lg p-1">
                                   <Button
                                     size="sm"
                                     onClick={() => handleQuickConfirm(bill, 'cash')}
-                                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs px-2.5 h-7 flex items-center gap-1 shadow-sm"
+                                    className="bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-medium text-xs px-2.5 h-8 flex items-center gap-1 shadow-sm touch-manipulation"
                                     disabled={loadingPaymentId === bill.id}
                                     title="Mark as fully paid via cash"
                                   >
                                     <Banknote className="h-3.5 w-3.5" />
-                                    Cash
+                                    <span className="hidden sm:inline">Cash</span>
                                   </Button>
                                   <Button
                                     size="sm"
                                     onClick={() => handleQuickConfirm(bill, 'upi')}
-                                    className="bg-violet-600 hover:bg-violet-700 text-white font-medium text-xs px-2.5 h-7 flex items-center gap-1 shadow-sm"
+                                    className="bg-violet-600 hover:bg-violet-700 active:bg-violet-800 text-white font-medium text-xs px-2.5 h-8 flex items-center gap-1 shadow-sm touch-manipulation"
                                     disabled={loadingPaymentId === bill.id}
                                     title="Mark as fully paid via UPI"
                                   >
                                     <Smartphone className="h-3.5 w-3.5" />
-                                    UPI
+                                    <span className="hidden sm:inline">UPI</span>
                                   </Button>
                                   <Button
                                     size="sm"
                                     variant="outline"
                                     onClick={() => openPayment(bill)}
-                                    className="h-7 text-xs font-medium bg-white border-gray-300 text-gray-700 hover:bg-gray-100 flex items-center gap-1"
+                                    className="h-8 text-xs font-medium bg-white border-gray-300 text-gray-700 hover:bg-gray-100 flex items-center gap-1 touch-manipulation px-2"
                                     disabled={loadingPaymentId === bill.id}
                                     title="Record a partial or other payment"
                                   >
                                     <SlidersHorizontal className="h-3.5 w-3.5" />
-                                    Partial
                                   </Button>
                                 </div>
                               )}
-                              <Button size="icon" variant="ghost" onClick={() => openEditBill(bill)} title="Edit Bill" className="h-8 w-8">
+                              <Button size="icon" variant="ghost" onClick={() => openEditBill(bill)} title="Edit Bill" className="h-9 w-9 touch-manipulation">
                                 <Pencil className="h-4 w-4 text-gray-500" />
                               </Button>
-                              <Button size="icon" variant="ghost" onClick={() => toggleExpand(bill.id)} className="h-8 w-8" title={isExpanded ? 'Collapse' : 'Expand details'}>
+                              <Button size="icon" variant="ghost" onClick={() => toggleExpand(bill.id)} className="h-9 w-9 touch-manipulation" title={isExpanded ? 'Collapse' : 'Expand details'}>
                                 {isExpanded ? <ChevronUp className="h-4 w-4 text-gray-500" /> : <ChevronDown className="h-4 w-4 text-gray-500" />}
                               </Button>
                             </div>

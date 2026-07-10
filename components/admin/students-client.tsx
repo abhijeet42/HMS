@@ -177,51 +177,51 @@ export default function StudentsClient({ students, rooms }: StudentsClientProps)
         ) : (
           <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm whitespace-nowrap">
+              <table className="w-full text-left text-sm" style={{minWidth: '640px'}}>
                 <thead className="bg-gray-50 text-gray-500 uppercase tracking-wider text-xs font-medium border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-4">Student</th>
-                    <th className="px-6 py-4">Contact</th>
-                    <th className="px-6 py-4">Room</th>
-                    <th className="px-6 py-4">Status</th>
-                    <th className="px-6 py-4 text-right">Actions</th>
+                    <th className="px-4 py-4">Student</th>
+                    <th className="px-4 py-4">Contact</th>
+                    <th className="px-4 py-4">Room</th>
+                    <th className="px-4 py-4">Status</th>
+                    <th className="px-4 py-4 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {filtered.map((student) => (
                     <tr key={student.id} className="hover:bg-gray-50/50">
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-semibold flex-shrink-0">
+                          <div className="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-semibold flex-shrink-0 text-sm">
                             {getInitials(student.full_name)}
                           </div>
-                          <div>
-                            <Link href={`/admin/students/${student.id}`} className="font-medium text-gray-900 hover:text-blue-600 transition-colors">
+                          <div className="min-w-0">
+                            <Link href={`/admin/students/${student.id}`} className="font-medium text-gray-900 hover:text-blue-600 transition-colors truncate block">
                               {student.full_name}
                             </Link>
-                            <p className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
+                            <p className="text-xs text-gray-500 mt-0.5 truncate">
                               {student.college ? student.college : 'No college added'}
                               {student.course && ` • ${student.course}`}
                             </p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 space-y-1">
+                      <td className="px-4 py-4 space-y-1">
                         <div className="flex items-center gap-2 text-gray-600">
-                          <Mail className="h-3.5 w-3.5" />
-                          <span className="text-xs">{student.email}</span>
+                          <Mail className="h-3.5 w-3.5 flex-shrink-0" />
+                          <span className="text-xs truncate max-w-[150px]">{student.email}</span>
                         </div>
                         {student.phone && (
                           <div className="flex items-center gap-2 text-gray-600">
-                            <Phone className="h-3.5 w-3.5" />
+                            <Phone className="h-3.5 w-3.5 flex-shrink-0" />
                             <span className="text-xs">{student.phone}</span>
                           </div>
                         )}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-4">
                         {student.rooms ? (
                           <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="font-medium bg-white">
+                            <Badge variant="outline" className="font-medium bg-white whitespace-nowrap">
                               <MapPin className="h-3 w-3 mr-1 text-gray-400" />
                               Room {student.rooms.room_number}
                             </Badge>
@@ -230,20 +230,20 @@ export default function StudentsClient({ students, rooms }: StudentsClientProps)
                           <span className="text-xs text-gray-400 italic">Unassigned</span>
                         )}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 py-4">
                         {student.status === 'active' && <Badge variant="success">Active</Badge>}
                         {student.status === 'inactive' && <Badge variant="warning">Inactive</Badge>}
                         {student.status === 'checked_out' && <Badge variant="default">Checked Out</Badge>}
                       </td>
-                      <td className="px-6 py-4 text-right">
-                        <div className="flex items-center justify-end gap-2">
-                          <Button size="icon" variant="ghost" onClick={() => openEdit(student)} title="Edit Student">
+                      <td className="px-4 py-4 text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          <Button size="icon" variant="ghost" onClick={() => openEdit(student)} title="Edit Student" className="h-9 w-9 touch-manipulation">
                             <Pencil className="h-4 w-4 text-gray-500" />
                           </Button>
                           <Button 
                             size="icon" 
                             variant="ghost" 
-                            className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50 h-9 w-9 touch-manipulation"
                             onClick={() => handleDelete(student)}
                             loading={deletingId === student.id}
                             title="Delete Student"

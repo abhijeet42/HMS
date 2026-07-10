@@ -58,8 +58,8 @@ export default function ComplaintActionModal({ complaint, onClose }: ComplaintAc
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-md rounded-xl bg-white shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 overflow-y-auto">
+      <div className="w-full sm:max-w-md sm:rounded-xl rounded-t-2xl bg-white shadow-xl sm:my-4 max-h-[95dvh] overflow-y-auto">
         <div className="flex items-center justify-between border-b px-6 py-4">
           <h2 className="text-base font-semibold text-gray-900 flex items-center gap-2">
             <Wrench className="h-5 w-5 text-gray-500" />

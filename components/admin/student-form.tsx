@@ -181,8 +181,8 @@ export default function StudentForm({ student, rooms, onClose }: StudentFormProp
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 overflow-y-auto">
-      <div className="w-full max-w-2xl rounded-xl bg-white shadow-xl my-8">
+    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center bg-black/40 overflow-y-auto p-0 sm:p-4">
+      <div className="w-full sm:max-w-2xl sm:rounded-xl bg-white shadow-xl sm:my-8 min-h-screen sm:min-h-0">
         {/* Header */}
         <div className="flex items-center justify-between border-b px-6 py-4 sticky top-0 bg-white rounded-t-xl z-10">
           <h2 className="text-base font-semibold text-gray-900">

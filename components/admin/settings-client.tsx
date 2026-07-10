@@ -246,36 +246,68 @@ export default function SettingsClient({
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
         
-        {/* Navigation Sidebar */}
-        <div className="lg:col-span-1 space-y-1">
-          {[
-            { id: 'hostel', label: 'Hostel Settings', icon: Building },
-            { id: 'profile', label: 'Admin Profile', icon: User },
-            { id: 'appearance', label: 'Appearance', icon: PaintBucket },
-            { id: 'notifications', label: 'Notifications', icon: Bell },
-            { id: 'security', label: 'Security', icon: ShieldCheck }
-          ].map((tab) => {
-            const Icon = tab.icon
-            return (
-              <button
-                key={tab.id}
-                onClick={() => {
-                  setActiveTab(tab.id as any)
-                  setMessage({ type: '', text: '' })
-                }}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-600 hover:bg-gray-100'
-                }`}
-              >
-                <Icon className="h-4 w-4" />
-                {tab.label}
-              </button>
-            )
-          })}
+        {/* Navigation Tabs - horizontal scroll on mobile, vertical sidebar on desktop */}
+        <div className="lg:col-span-1">
+          {/* Mobile: horizontal scrollable tabs */}
+          <div className="flex gap-1 overflow-x-auto pb-1 lg:hidden scrollbar-none">
+            {[
+              { id: 'hostel', label: 'Hostel', icon: Building },
+              { id: 'profile', label: 'Profile', icon: User },
+              { id: 'appearance', label: 'Theme', icon: PaintBucket },
+              { id: 'notifications', label: 'Alerts', icon: Bell },
+              { id: 'security', label: 'Security', icon: ShieldCheck }
+            ].map((tab) => {
+              const Icon = tab.icon
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveTab(tab.id as any)
+                    setMessage({ type: '', text: '' })
+                  }}
+                  className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-colors flex-shrink-0 ${
+                    activeTab === tab.id
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white border border-gray-200 text-gray-600'
+                  }`}
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                  {tab.label}
+                </button>
+              )
+            })}
+          </div>
+          {/* Desktop: vertical sidebar tabs */}
+          <div className="hidden lg:flex flex-col space-y-1">
+            {[
+              { id: 'hostel', label: 'Hostel Settings', icon: Building },
+              { id: 'profile', label: 'Admin Profile', icon: User },
+              { id: 'appearance', label: 'Appearance', icon: PaintBucket },
+              { id: 'notifications', label: 'Notifications', icon: Bell },
+              { id: 'security', label: 'Security', icon: ShieldCheck }
+            ].map((tab) => {
+              const Icon = tab.icon
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveTab(tab.id as any)
+                    setMessage({ type: '', text: '' })
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                    activeTab === tab.id
+                      ? 'bg-blue-50 text-blue-700'
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  {tab.label}
+                </button>
+              )
+            })}
+          </div>
         </div>
 
         {/* Tab Contents */}

@@ -82,19 +82,19 @@ export default function StudentProfileView({
 
       {/* Tabs */}
       <div className="border-b border-gray-200">
-        <nav className="flex gap-6 -mb-px">
+        <nav className="flex gap-1 sm:gap-6 -mb-px overflow-x-auto scrollbar-none">
           {[
-            { id: 'personal', label: 'Personal & Room Details', icon: User },
-            { id: 'payments', label: 'Billing & Rent History', icon: Receipt },
-            { id: 'notices', label: 'Active Notices', icon: Bell },
-            { id: 'complaints', label: 'My Complaints', icon: MessageSquare }
+            { id: 'personal', label: 'Personal & Room', icon: User },
+            { id: 'payments', label: 'Billing & Rent', icon: Receipt },
+            { id: 'notices', label: 'Notices', icon: Bell },
+            { id: 'complaints', label: 'Complaints', icon: MessageSquare }
           ].map((tab) => {
             const Icon = tab.icon
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${
+                className={`flex items-center gap-1.5 py-3 sm:py-4 px-2 sm:px-1 border-b-2 font-medium text-xs sm:text-sm transition-colors whitespace-nowrap flex-shrink-0 touch-manipulation ${
                   activeTab === tab.id
                     ? 'border-blue-600 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -209,15 +209,15 @@ export default function StudentProfileView({
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm whitespace-nowrap">
+                <table className="w-full text-left text-sm" style={{minWidth: '600px'}}>
                   <thead className="bg-gray-50 text-gray-500 uppercase tracking-wider text-xs font-medium border-b border-gray-200">
                     <tr>
-                      <th className="px-6 py-4">Billing Period</th>
-                      <th className="px-6 py-4">Total Rent</th>
-                      <th className="px-6 py-4">Paid</th>
-                      <th className="px-6 py-4">Outstanding</th>
-                      <th className="px-6 py-4">Status</th>
-                      <th className="px-6 py-4">Due Date</th>
+                      <th className="px-4 py-4">Billing Period</th>
+                      <th className="px-4 py-4">Total Rent</th>
+                      <th className="px-4 py-4">Paid</th>
+                      <th className="px-4 py-4">Outstanding</th>
+                      <th className="px-4 py-4">Status</th>
+                      <th className="px-4 py-4">Due Date</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">

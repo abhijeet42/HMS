@@ -24,7 +24,7 @@ export default async function AdminLayout({
   return (
     <div className="flex min-h-screen bg-gray-50">
       <AdminSidebar />
-      <main className="flex-1 lg:min-w-0 overflow-x-hidden">
+      <main className="flex-1 lg:min-w-0 overflow-x-hidden min-w-0">
         {/* Top padding for mobile header */}
         <div className="lg:hidden h-14" />
         {children}

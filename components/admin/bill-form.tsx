@@ -209,8 +209,8 @@ export default function BillForm({ students, onClose, editBill, defaultStudentId
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 p-4 pt-10">
-      <div className="w-full max-w-2xl rounded-xl bg-white shadow-xl my-4">
+    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center bg-black/40 overflow-y-auto p-0 sm:p-4">
+      <div className="w-full sm:max-w-2xl sm:rounded-xl bg-white shadow-xl sm:my-4 min-h-screen sm:min-h-0">
         <div className="flex items-center justify-between border-b px-6 py-4">
           <h2 className="text-base font-semibold text-gray-900 flex items-center gap-2">
             <Receipt className="h-5 w-5 text-blue-600" />
