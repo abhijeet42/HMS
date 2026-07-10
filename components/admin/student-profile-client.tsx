@@ -143,10 +143,10 @@ export default function StudentProfileClient({
         />
       )}
 
-      <div className="p-6 space-y-6 max-w-7xl mx-auto">
+      <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl mx-auto">
         {/* Back Link & Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+          <div className="space-y-1 min-w-0">
             <Link
               href="/admin/students"
               className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-900 transition-colors"
@@ -154,8 +154,8 @@ export default function StudentProfileClient({
               <ArrowLeft className="h-4 w-4" />
               Back to Students
             </Link>
-            <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-gray-900">{student.full_name}</h1>
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 truncate">{student.full_name}</h1>
               <Badge
                 variant={
                   student.status === 'active'
@@ -174,36 +174,38 @@ export default function StudentProfileClient({
             </div>
           </div>
 
-          <div className="flex gap-2">
-            <Button onClick={() => setShowBillForm(true)} className="bg-blue-600 hover:bg-blue-700">
-              <Plus className="h-4 w-4 mr-2" />
-              Generate Monthly Rent
+          <div className="flex gap-2 flex-shrink-0">
+            <Button onClick={() => setShowBillForm(true)} className="bg-blue-600 hover:bg-blue-700 text-sm">
+              <Plus className="h-4 w-4 mr-1.5" />
+              <span className="hidden sm:inline">Generate Monthly Rent</span>
+              <span className="sm:hidden">Generate Bill</span>
             </Button>
           </div>
         </div>
 
-        {/* Tab Headers */}
+        {/* Tab Headers — horizontal scroll on mobile */}
         <div className="border-b border-gray-200">
-          <nav className="flex gap-6 -mb-px">
+          <nav className="flex gap-0 -mb-px overflow-x-auto scrollbar-none">
             {[
-              { id: 'personal', label: 'Personal & Room Info', icon: User },
-              { id: 'rent', label: 'Rent Details & History', icon: Receipt },
-              { id: 'complaints', label: 'Complaint History', icon: FileText },
-              { id: 'notes', label: 'Internal Notes', icon: ShieldAlert }
+              { id: 'personal', label: 'Personal', fullLabel: 'Personal & Room', icon: User },
+              { id: 'rent', label: 'Rent', fullLabel: 'Rent History', icon: Receipt },
+              { id: 'complaints', label: 'Complaints', fullLabel: 'Complaints', icon: FileText },
+              { id: 'notes', label: 'Notes', fullLabel: 'Internal Notes', icon: ShieldAlert }
             ].map((tab) => {
               const Icon = tab.icon
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 py-3 px-3 sm:px-4 border-b-2 font-medium text-xs sm:text-sm transition-colors whitespace-nowrap flex-shrink-0 touch-manipulation ${
                     activeTab === tab.id
                       ? 'border-blue-600 text-blue-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 >
-                  <Icon className="h-4 w-4" />
-                  {tab.label}
+                  <Icon className="h-4 w-4 flex-shrink-0" />
+                  <span className="sm:hidden">{tab.label}</span>
+                  <span className="hidden sm:inline">{tab.fullLabel}</span>
                 </button>
               )
             })}
