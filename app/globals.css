@@ -180,11 +180,4 @@
 /* Prevent iOS bounce scroll on modal backdrops */
 .modal-backdrop {
   overscroll-behavior: contain;
-}
-
-/* Minimum touch target size */
-@media (max-width: 1024px) {
-  button, a, [role="button"] {
-    min-height: 36px;
-  }
-}
+}

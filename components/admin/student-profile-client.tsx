@@ -177,8 +177,7 @@ export default function StudentProfileClient({
           <div className="flex gap-2 flex-shrink-0">
             <Button onClick={() => setShowBillForm(true)} className="bg-blue-600 hover:bg-blue-700 text-sm">
               <Plus className="h-4 w-4 mr-1.5" />
-              <span className="hidden sm:inline">Generate Monthly Rent</span>
-              <span className="sm:hidden">Generate Bill</span>
+              <span>Generate Monthly Rent</span>
             </Button>
           </div>
         </div>
